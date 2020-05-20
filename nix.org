@@ -1,0 +1,46 @@
+#+title: nix
+#+author: Kaan Sahin
+
+
+* Eigene Version eines Programms in eine nix-shell laden
+Suche zuerst in nix search, ob es die Version schon gibt, wenn nicht, passe eine
+verfügbare Version an.
+ Beispiel für Leiningen, Version 2.8.3
+** config.nix Datei
+   #+begin_src nixOS
+{
+   packageOverrides = pkgs: rec {
+
+   lein283 = pkgs.stdenv.lib.overrideDerivation pkgs.leiningen (oldAttrs: rec {
+        version = "2.8.3";
+        name = "leiningen-${version}";
+        src = pkgs.fetchurl {
+          url = "https://raw.github.com/technomancy/leiningen/${version}/bin/lein-pkg";
+          sha256 = "1jbrm4vdvwskbi9sxvn6i7h2ih9c3nfld63nx58nblghvlcb9vwx";
+        };
+        jarsrc = pkgs.fetchurl {
+          # NOTE: This is actually a .jar, Github has issues
+          url = "https://github.com/technomancy/leiningen/releases/download/${version}/${name}-standalone.zip";
+          sha256 = "07kb7d84llp24l959gndnfmislnnvgpsxghmgfdy8chy7g4sy2kz";
+        };
+        JARNAME = "${name}-standalone.jar";
+     });
+   };
+}
+   #+end_src
+** default.nix Datei
+   #+begin_src nix
+with (import <nixpkgs> { config = import ./config.nix; }); {
+   ecEnv = stdenv.mkDerivation {
+      name = "eBikeEnv";
+      shellHook = ''
+         export PS1="[eBikeEnv:\w]$ "
+      '';
+      nativeBuildInputs = [
+         lein283
+         ];
+      src = null;
+   };
+}
+
+   #+end_src

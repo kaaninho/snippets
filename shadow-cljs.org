@@ -1,0 +1,39 @@
+#+title: shadow-cljs Anleitung
+
+* Build
+- Ein Projekt mit =lein new shadow-cljs app 'name'= erstellen
+
+* CIDER / Emacs Integration
+- In =shadow-cljs.edn= Datei:
+#+begin_src clojure
+ :dependencies [[binaryage/devtools "0.9.7"]
+                [reacl "2.1.1"]
+                [cider/cider-nrepl "0.21.1"]]
+
+ ;; set an nrepl port for connection to a REPL.
+ :nrepl        {:port 8777}
+
+#+end_src
+- Dann in shell =shadow-cljs watch app=
+  - =cider-connect= und =cider-connect-sibling-cljs=
+- Oder direkt =cider-jack-in-cljs=
+
+* Reacl
+reacl benutzt =cljsjs=. Das ist in shadow-cljs nur mit Umwegen benutzbar.
+- Erstelle auf =src=-Ebene einen Ordne =cljsjs= und darin die Datei =react.cljs=
+  Inhalt:
+#+begin_src clojure
+(ns cljsjs.react
+  (:require ["react" :as react]
+            ["create-react-class" :as crc]))
+
+(js/goog.object.set react "createClass" crc)
+(js/goog.exportSymbol "React" react)
+#+end_src
+- Ebenso Datei =prop_types.cljs=
+#+begin_src clojure
+(ns cljsjs.prop-types
+  (:require ["prop-types" :as prop-types]))
+
+(js/goog.exportSymbol "PropTypes" prop-types)
+#+end_src
