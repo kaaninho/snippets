@@ -46,7 +46,6 @@ Das obige auch ausführen (modprobe...) falls mal irgendwie =i8kfan= / =i8kmon= 
 *** i8k Benutzung
 https://medium.com/@kasunsiyambalapitiya/fixing-constantly-running-fans-on-dell-laptops-running-ubuntu-16-04-8cf6595381d9
 
-
 ** dell-bios-fan-control
 
 i8k wird leider von den Bios-Einstellungen überschrieben, deshalb explizit Bios
@@ -391,3 +390,118 @@ und den Wert auf =true= setzen
 ** dtrx
 
  Versucht, gg. Datei zu extrahieren, egal welches Format
+
+* Memory-Management
+mit =free -m= Memory-Usage anschauen. "available" ist der wichtige und richtige
+Wert. Ist RAM zu voll, wird teilweise geswappt. Swapping macht PC langsam und
+warm (so meine Erfahrung). Deshalb kann man Swapping-Verhalten anpassen:
+** Swap
+*** Swap leeren
+ Wenn was im Swap Speicher ist, obwohl man genug RAM hätte, kann man mit
+ folgenden Befehlen den Swap kurzzeitig aus- und anschalten. Die Swap-Inhalte
+ werden vor dem Ausschalten in den RAM gepumpt.
+
+ #+begin_src bash
+ sudo swapoff -a
+ sudo swapon -a
+ #+end_src
+
+*** Swappiness
+ Man kann einstellen, wie zügig der Swap-Speicher benutzt werden soll.
+
+ #+begin_src bash
+ # Zeige aktuelle Swappiness (default Ubuntu ist 60)
+ cat /proc/sys/vm/swappiness
+ # Setze Swappiness
+ sudo sysctl vm.swappiness=10
+ #+end_src
+
+ Geringerer Wert = weniger schnell zum Swap-Speicher greifen. Nach Neustart
+ wieder auf default. Um es permanent zu schalten, muss der Datei
+ =/etc/sysctl.conf= folgendes hinzugefügt werden: =vm.swappiness=10=
+
+ Quelle(n)
+ https://www.howtoforge.com/tutorial/linux-swappiness/
+ https://www.howtogeek.com/449691/what-is-swapiness-on-linux-and-how-to-change-it/
+
+* Boot-Screen ändern 
+Von hier https://www.gnome-look.org/p/1339324/ Bootscreen auswählen.
+
+** Schöne Screens
+- ubuntu touch
+https://www.gnome-look.org/p/1339324/
+- ubuntu vision 
+https://www.gnome-look.org/p/1359645/
+- lilith-glamour
+https://www.gnome-look.org/p/1351775/
+
+** Installation
+
+Am Beispiel ubuntu-vision. mit =plymouth-x11= kann man eine Vorschau sehen.
+
+#+begin_src bash
+sudo mkdir /usr/share/plymouth/themes/ubuntu-vision
+clear
+sudo rsync -aq --exclude=install-ubuntu-vision * /usr/share/plymouth/themes/ubuntu-vision/
+clear
+sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/ubuntu-vision/ubuntu-vision.plymouth 100
+sudo update-alternatives --config default.plymouth  #here, choose the number of the theme you want to use then hit enter
+sudo update-initramfs -u
+echo
+echo Installing plymouth-x11...   Redundant if already installed.
+sudo apt-get install plymouth-x11
+echo
+echo Running 10-second test...
+sudo plymouthd ; sudo plymouth --show-splash ; for ((I=0; I<10; I++)); do sleep 1 ; sudo plymouth --update=test$I ; done ; sudo plymouth --quit
+exit
+#+end_src
+
+ausführen
+
+* Login-Screen ändern
+https://askubuntu.com/questions/797845/how-do-i-change-the-login-screen-in-ubuntu-16-04#:~:text=In%20short%3A%20Open%20sudo%20gedit,restart%20to%20try%20it%20out.
+* Desktop gnome Theme ändern
+** Schöne Themes
+- https://www.gnome-look.org/p/1334194/
+- https://www.gnome-look.org/p/1357889/
+- oder allgmein auf https://www.gnome-look.org/ oder https://pling.com schauen
+
+** Installation
+- Themes werden in den Ordner =/home/kaan/.themes= entpackt
+- Icon-Packages in =/home/kaan/.icons=
+
+Dann kann man mit dem Gnome Tweaks Tool unter "Appearance" die gewünschten
+Themes und Icon-Packages auswählen
+
+* Nur bestimmten Monitor sharen
+https://github.com/Ashark/hliss
+* Bildschirm aufnehmen, Screen Capture
+**  Kazam 
+Kann sogar nur Teile des Bildschirms aufnehmen, easy usage
+#+begin_src bash
+sudo apt install kazam
+#+end_src
+* Login Fail, Unlock GUI from console
+Falls man sich mal grafisch nicht mehr einloggen kann, folgender Befehl in einer
+Konsole unlockt Sessions:
+
+#+begin_src bash
+sudo loginctl unlock-sessions
+#+end_src
+
+(War bei mir der Fall nach nem Update. Kam beim GUI-Login "Authentication
+Error". Anscheinend, weil fs.inotify.max_user_watches auf einen sehr niedrigen
+Wert gesetzt war. Schreibe in =/etc/sysctl.conf= rein: 
+
+#+begin_src bash
+fs.inotify.max_user_watches=524288
+#+end_src 
+
+und es sollte wieder funktionieren.)
+* CAPS LOCK als ESCAPE
+Tweaks -> Keyboard & Mouse -> Additional Layout Options -> Caps Lock behavior ->
+Make Caps Lock an additional Esc
+
+Es kann sein, dass es mal für externe Tastatur nicht funktioniert. Dann
+deaktivieren, Tweaks schließen, wieder starten und aktivieren.
+* gnome-shell-extensions

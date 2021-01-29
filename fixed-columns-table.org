@@ -1,0 +1,67 @@
+* In reacl fixed columns
+Zeichne zweimal dieselbe Tabelle, eine mit Style-Attribut =position= als
+=absolute=. Verstecke dort alle Spalten, die nicht fix sein sollen, setze deren
+=visibility= auf =hidden=.
+
+** Code-Beispiel
+Hier war zu beachten, dass =table-responsive= das Attribut =overflow-x=
+überschrieben hatte.
+
+#+begin_src clojure
+modified   src/main/clojure/src/webclient/verwaltung/workflows.cljs
+(reacl2/defclass table-with-fixed-columns this state [local-state options]
+  ;; This class is needed for having a table with fixed columns.
+  ;; We draw the table 2 times, one table only shows the fixed columns.
+  ;; That table has `position` `absolute` as style. We set this in the
+  ;; CSS file via the id `first-columns-table`.
+  ;; To hide the other columns (which should scroll), we use the code
+  ;; of `component-did-update`.
+  component-did-mount
+  (fn []
+    (let [comp (js/$ "#first-columns-table")
+          table (.find comp "table")
+          trs (.find table "tr")
+          td-fun (fn []
+                   (this-as my-this
+                     (.attr (js/$ my-this) "style" "background-color:black; visibility:hidden")))]
+
+      (.each (.find trs "td:not(:first-child, :nth(1))")
+             td-fun)
+      (.each (.find trs "th:not(:first-child, :nth(1))")
+             td-fun)
+      (reacl2/return)))
+
+  render
+  (let [the-table-fn (fn [& [id]]
+                       (dom/div
+                        (when id
+                          {:id "first-columns-table"})
+                        (utils/create-table-with-border
+                         (surveys-header (insert-archive-phase (lens/yank state workflow-archive-phase-lens) (lens/yank state workflow-phases-lens)))
+                         nil
+                         (when-not (nil? (:selected-tab local-state))
+                           (remove #(or (optional-task? %)
+                                        (external-link? %))
+                                   (surveys-and-tasks-for-group (:selected-tab local-state) state)))
+                         (partial surveys-entry-fn
+                                  this
+                                  (:selected-surveys local-state)
+                                  (insert-archive-phase (lens/yank state workflow-archive-phase-lens) (lens/yank state workflow-phases-lens))
+                                  (= :anamnese (:selected-tab local-state))
+                                  (lens/yank state workflow-repeated-phase-lens))
+                         options
+                         :table-color "#2da2e4")))]
+    (dom/div
+     {:id "double-table"
+      :style {:position "relative"}}
+     (the-table-fn true)
+     (the-table-fn))))
+#+end_src
+
+#+begin_src css
+#first-columns-table .table-responsive {
+    overflow-x : hidden !important;
+    position: absolute;
+    width:100%;
+}
+#+end_src
