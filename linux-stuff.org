@@ -475,7 +475,7 @@ Themes und Icon-Packages auswählen
 
 * Nur bestimmten Monitor sharen
 https://github.com/Ashark/hliss
-* Bildschirm aufnehmen, Screen Capture
+* Bildschirm aufnehmen, Screen Capture, Video
 **  Kazam 
 Kann sogar nur Teile des Bildschirms aufnehmen, easy usage
 #+begin_src bash
@@ -505,3 +505,37 @@ Make Caps Lock an additional Esc
 Es kann sein, dass es mal für externe Tastatur nicht funktioniert. Dann
 deaktivieren, Tweaks schließen, wieder starten und aktivieren.
 * gnome-shell-extensions
+* Gnu Pass
+Passwort-Manager im Terminal
+
+** Installation
+
+#+begin_src bash
+sudo apt install pass
+#+end_src
+
+** Init
+mit GPG key
+
+GPG-Key anzeigen via
+
+#+begin_src bash
+gpg --list-keys
+#+end_src
+
+Das unter Pub nehmen (== GPG-KEY)
+#+begin_src bash
+pass init GPG KEY
+#+end_src
+
+** Passwort erstellen
+
+#+begin_src bash
+pass insert NAME-VOM-PASSWORT
+#+end_src
+
+** Passwort holen
+
+#+begin_src bash
+pass show NAME-VOM-PASSWORT
+#+end_src
