@@ -539,3 +539,13 @@ pass insert NAME-VOM-PASSWORT
 #+begin_src bash
 pass show NAME-VOM-PASSWORT
 #+end_src
+
+* Apple Spotlight / Quicksilver / Alfred / Albert Alternative
+Es gibt auch noch
+- Albert
+- Cerebro
+
+Cerebro hat bei mir nicht funktioniert. Albert war manchmal nervig, weiß nicht
+mehr warum.
+
+Habe nun Synapse, mal sehen.
