@@ -424,6 +424,14 @@ warm (so meine Erfahrung). Deshalb kann man Swapping-Verhalten anpassen:
  https://www.howtoforge.com/tutorial/linux-swappiness/
  https://www.howtogeek.com/449691/what-is-swapiness-on-linux-and-how-to-change-it/
 
+*** Prozesse, die Swap benutzen, anzeigen
+
+Um zu sehen, welche Prozesse wie viel Swap benutzen, folgenden Code ausführen:
+
+#+begin_src bash
+for file in /proc/*/status ; do awk '/VmSwap|Name/{printf $2 " " $3}END{ print ""}' $file; done | sort -k 2 -n -r | less
+#+end_src
+
 * Boot-Screen ändern 
 Von hier https://www.gnome-look.org/p/1339324/ Bootscreen auswählen.
 
