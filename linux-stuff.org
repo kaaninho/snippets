@@ -513,6 +513,22 @@ Make Caps Lock an additional Esc
 Es kann sein, dass es mal für externe Tastatur nicht funktioniert. Dann
 deaktivieren, Tweaks schließen, wieder starten und aktivieren.
 * gnome-shell-extensions
+** gtile
+
+Damit kann man Fenster am Bildschirm anordnen, z. B. hälftig im Monitor, oder
+ein Drittel oder oder oder.
+
+Konfiguriere über Presets, z. B. :
+
+=6x1 2:0 3:0, 1:0 4:0=
+
+bedeutet
+
+- =6x1=: horizontal Sechstel (6), vertikal kein Teilen (1). 
+
+- =2:0 3:0= nimm Platz vom 2. Sechstel bis 4. ein
+- =1:0 4:0= nimm Platz vom 1. Sechstel bis 5. ein
+
 * Gnu Pass
 Passwort-Manager im Terminal
 
@@ -553,7 +569,69 @@ Es gibt auch noch
 - Albert
 - Cerebro
 
-Cerebro hat bei mir nicht funktioniert. Albert war manchmal nervig, weiß nicht
+
+** Cerebro
+
+Cerebro hat bei mir nicht funktioniert.
+
+Funktioniert jetzt. Man kann es manuell bauen und installieren via Github-Repo
+https://github.com/cerebroapp/cerebro und dann
+
+#+begin_src bash
+git clone https://github.com/cerebroapp/cerebro.git
+cd cerebro
+sed -i 's/"0.3.3"/"0.4.0"/g' app/package.json
+sed -i 's/"0.3.3"/"0.4.0"/g' package.json
+(yarn; cd app; yarn); yarn build
+./release/Cerebro-0.4.0.AppImage
+#+end_src
+
+** Albert
+
+ Albert war manchmal nervig, weiß nicht
 mehr warum.
 
-Habe nun Synapse, mal sehen.
+** Synapse
+
+Habe nun Synapse, mal sehen, funktioniert gut, auch File-Suche. Sieht UI-mäßig
+hässlich aus.
+
+* Top aber für Network Usage
+
+Installiere "nethogs"
+
+#+begin_src bash
+sudo apt install nethogs
+#+end_src
+
+* Remote Desktop
+
+Remmina, ist schon vorinstalliert.
+
+* Um eine Anwendung im Ubuntu Activities anzeigen zu lassen
+
+Z. B. durch nix installierte Pakete tauchen nicht auf, wenn man dann
+Windows-Taste drückt. Abhilfe:
+
+Mache Symlink zu <program>.desktop-Datei in Pfad =/usr/share/applications/=
+
+Beispiel:
+
+#+begin_src bash
+ln -sf emacs.desktop /usr/share/application/emacs.desktop
+#+end_src
+
+=s= für symbolic und =f= dass man Pfad angeben kann.
+
+* Microsoft Office installieren
+
+- Quelle:
+  https://www.makeuseof.com/tag/install-use-microsoft-office-linux/
+- Image MS Office 2016 herunterladen
+  https://officecdn.microsoft.com/db/492350F6-3A01-4F97-B9C0-C7C6DDF67D60/media/de-DE/ProfessionalRetail.img
+- Programm PlayOnLinux installieren
+  #+begin_src bash
+  sudo apt install winbind
+  sudo apt install playonlinux
+  #+end_src
+- via PlayOnLinux MS Office 2016 (method B) installieren
