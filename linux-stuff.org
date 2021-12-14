@@ -635,3 +635,19 @@ ln -sf emacs.desktop /usr/share/application/emacs.desktop
   sudo apt install playonlinux
   #+end_src
 - via PlayOnLinux MS Office 2016 (method B) installieren
+
+* USB erkennt externe Tastatur/Maus nicht
+
+Liegt häufig an Suspend. Benutze 
+
+#+begin_src bash
+dmesg | grep -i USB
+#+end_src
+
+oder =lsusb=, um zu gucken, ob das Gerät angezeigt wird. Wenn nicht, versuche
+via =usbreset= das USB-Gerät zurückzusetzen. Mit =usbreset= Geräte anzeigen
+lassen und dann eins davon neustarten, z. B.:
+
+#+begin_src bash
+usbreset 001/003
+#+end_src
