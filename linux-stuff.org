@@ -529,6 +529,14 @@ bedeutet
 - =2:0 3:0= nimm Platz vom 2. Sechstel bis 4. ein
 - =1:0 4:0= nimm Platz vom 1. Sechstel bis 5. ein
 
+** Microphone Usage Indicator
+
+Gnome Shell Extension "Nothing to say"
+
+** Alt Tab lift first window
+** Alt Tab Workspace
+** system-monitor
+** User Themes
 * Gnu Pass
 Passwort-Manager im Terminal
 
