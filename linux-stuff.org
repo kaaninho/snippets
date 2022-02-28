@@ -651,3 +651,27 @@ lassen und dann eins davon neustarten, z. B.:
 #+begin_src bash
 usbreset 001/003
 #+end_src
+
+* ProxyCommand Jumphosts
+
+Um nicht zwei SSH-Befehle hintereinander ausführen zu müssen, kann man in der
+Datei =~/.ssh/config= den Befehl "ProxyCommand" benutzen:
+
+Z. B. wollen wir auf Joshua, der auf Leibniz liegt. Normalerweise müsste man
+machen:
+
+#+begin_src bash
+$> ssh root@leibniz.active-group.de
+leibniz$> ssh root@joshua-x
+#+end_src
+
+Schreibt man in die obige Datei aber Folgendes rein:
+
+#+begin_src bash
+Host joshua-x
+  ProxyCommand ssh root@leibniz.active-group.de -W %h:%p
+  User root
+#+end_src
+
+Muss man ab sofort nur noch =ssh root@joshua-x= schreiben.
+
