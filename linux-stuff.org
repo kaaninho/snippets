@@ -675,3 +675,10 @@ Host joshua-x
 
 Muss man ab sofort nur noch =ssh root@joshua-x= schreiben.
 
+* Public SSH-Key auf Server hinterlassen
+
+Geht mit folgendem Befehl:
+
+#+begin_src bash
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@bbb.active-group.de
+#+end_src
