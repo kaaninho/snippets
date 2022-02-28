@@ -5,7 +5,7 @@ Der Suspend-Modus unter Ubuntu 18.04. mit Dell XPS 13 ist teilweise sehr
 batteriehungrig.
 
 #+begin_src bash
-cat /sys/power/mem_sleep 
+cat /sys/power/mem_sleep
 #+end_src
 
 sollte ~s2idle [deep]~ zurückgeben, um in einen batteriefreundlicheren Ruhemodus
@@ -56,7 +56,7 @@ Das herunterladen
 
 https://github.com/TomFreudenberg/dell-bios-fan-control
 
-und =make= ausführen. Dann kann via 
+und =make= ausführen. Dann kann via
 
 #+begin_src bash
 > dell-bios-fan-control 0
@@ -82,7 +82,7 @@ Gefunden auf https://bugs.launchpad.net/i8kutils/+bug/410596
 > Add "dell-smm-hwmon" to /etc/modules and verify you have "options
 > dell-smm-hwmon restricted=0" in /etc/modprobe.d/dell-smm-hwmon.conf
 
-Stand jetzt ist: in =/etc/modules= steht bei mir 
+Stand jetzt ist: in =/etc/modules= steht bei mir
 
 #+begin_src bash
 # /etc/modules: kernel modules to load at boot time.
@@ -432,13 +432,13 @@ Um zu sehen, welche Prozesse wie viel Swap benutzen, folgenden Code ausführen:
 for file in /proc/*/status ; do awk '/VmSwap|Name/{printf $2 " " $3}END{ print ""}' $file; done | sort -k 2 -n -r | less
 #+end_src
 
-* Boot-Screen ändern 
+* Boot-Screen ändern
 Von hier https://www.gnome-look.org/p/1339324/ Bootscreen auswählen.
 
 ** Schöne Screens
 - ubuntu touch
 https://www.gnome-look.org/p/1339324/
-- ubuntu vision 
+- ubuntu vision
 https://www.gnome-look.org/p/1359645/
 - lilith-glamour
 https://www.gnome-look.org/p/1351775/
@@ -484,7 +484,7 @@ Themes und Icon-Packages auswählen
 * Nur bestimmten Monitor sharen
 https://github.com/Ashark/hliss
 * Bildschirm aufnehmen, Screen Capture, Video
-**  Kazam 
+**  Kazam
 Kann sogar nur Teile des Bildschirms aufnehmen, easy usage
 #+begin_src bash
 sudo apt install kazam
@@ -499,11 +499,11 @@ sudo loginctl unlock-sessions
 
 (War bei mir der Fall nach nem Update. Kam beim GUI-Login "Authentication
 Error". Anscheinend, weil fs.inotify.max_user_watches auf einen sehr niedrigen
-Wert gesetzt war. Schreibe in =/etc/sysctl.conf= rein: 
+Wert gesetzt war. Schreibe in =/etc/sysctl.conf= rein:
 
 #+begin_src bash
 fs.inotify.max_user_watches=524288
-#+end_src 
+#+end_src
 
 und es sollte wieder funktionieren.)
 * CAPS LOCK als ESCAPE
@@ -524,7 +524,7 @@ Konfiguriere über Presets, z. B. :
 
 bedeutet
 
-- =6x1=: horizontal Sechstel (6), vertikal kein Teilen (1). 
+- =6x1=: horizontal Sechstel (6), vertikal kein Teilen (1).
 
 - =2:0 3:0= nimm Platz vom 2. Sechstel bis 4. ein
 - =1:0 4:0= nimm Platz vom 1. Sechstel bis 5. ein
@@ -646,7 +646,7 @@ ln -sf emacs.desktop /usr/share/application/emacs.desktop
 
 * USB erkennt externe Tastatur/Maus nicht
 
-Liegt häufig an Suspend. Benutze 
+Liegt häufig an Suspend. Benutze
 
 #+begin_src bash
 dmesg | grep -i USB
