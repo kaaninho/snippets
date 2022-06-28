@@ -1,0 +1,38 @@
+#+title: nrepl-Support
+
+Je nach Buildtool müssen unterschiedliche Dateien angelegt werden:
+
+* Leiningen
+
+Unter =~/.lein/profiles.clj= folgende Optionen (angepasst an eigene Versionen)
+setzen:
+
+#+begin_src clojure
+{
+ :repl {:plugins [[refactor-nrepl/refactor-nrepl "3.5.2"]
+                  [cider/cider-nrepl "0.28.3"]]
+        :dependencies [[nrepl/nrepl "0.9.0"]]}}
+#+end_src
+
+* Shadow-CLJS
+
+Für shadow-cljs muss =~/.shadow-cljs/config.edn= angelegt werden:
+
+#+begin_src clojure
+{:plugins [[cider/cider-nrepl "0.28.3"]]
+ :dependencies [[nrepl/nrepl "0.9.0"]
+                [cider/piggieback "0.5.2"]
+                [refactor-nrepl/refactor-nrepl "3.5.2"]
+                [cider/cider-nrepl "0.28.3"]]}
+#+end_src
+
+* Clojure Tools
+
+Für =clj= muss die Datei =~/.clojure/deps.edn= angelegt werden:
+
+#+begin_src clojure
+{:deps {nrepl/nrepl                   {:mvn/version "0.9.0"}
+        refactor-nrepl/refactor-nrepl {:mvn/version "3.5.2"}
+        cider/cider-nrepl             {:mvn/version "0.28.3"}
+        cider/piggieback              {:mvn/version "0.5.2"}}}
+#+end_src
