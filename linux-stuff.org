@@ -691,3 +691,9 @@ Geht mit folgendem Befehl:
 #+begin_src bash
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@bbb.active-group.de
 #+end_src
+
+* Backups (auch zu Remote-Server)
+
+Gerade benutze ich BackInTime
+
+Alternative Deja Dup? Anschauen nächstes Mal
