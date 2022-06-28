@@ -1,6 +1,7 @@
 #+title: Linux-Stuff
 
 * Standby / Ruhemodus / Suspend
+
 Der Suspend-Modus unter Ubuntu 18.04. mit Dell XPS 13 ist teilweise sehr
 batteriehungrig.
 
@@ -520,14 +521,14 @@ ein Drittel oder oder oder.
 
 Konfiguriere über Presets, z. B. :
 
-=6x1 2:0 3:0, 1:0 4:0=
+=6x1 3:1 4:1, 2:1 5:1=
 
 bedeutet
 
 - =6x1=: horizontal Sechstel (6), vertikal kein Teilen (1).
 
-- =2:0 3:0= nimm Platz vom 2. Sechstel bis 4. ein
-- =1:0 4:0= nimm Platz vom 1. Sechstel bis 5. ein
+- =3:1 4:1= nimm Platz vom 3. Sechstel bis 4. ein
+- =2:1 5:1= nimm Platz vom 2. Sechstel bis 5. ein
 
 ** Microphone Usage Indicator
 
@@ -573,10 +574,10 @@ pass show NAME-VOM-PASSWORT
 #+end_src
 
 * Apple Spotlight / Quicksilver / Alfred / Albert Alternative
+
 Es gibt auch noch
 - Albert
 - Cerebro
-
 
 ** Cerebro
 
