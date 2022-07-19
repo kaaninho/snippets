@@ -47,6 +47,41 @@ Das obige auch ausführen (modprobe...) falls mal irgendwie =i8kfan= / =i8kmon= 
 *** i8k Benutzung
 https://medium.com/@kasunsiyambalapitiya/fixing-constantly-running-fans-on-dell-laptops-running-ubuntu-16-04-8cf6595381d9
 
+U. a. Datei anlegen =/etc/i8kmon.conf= mit Inhalt:
+
+#+begin_src bash
+# Sample i8kmon configuration file (/etc/i8kmon.conf, ~/.i8kmon).
+# External program to control the fans
+set config(i8kfan)  /usr/bin/i8kfan
+# Run as daemon, override with --daemon option
+set config(daemon) 0
+# Automatic fan control, override with --auto option
+set config(auto) 1
+set config(nouserconfig) 1
+# Applet geometry, override with --geometry option
+set config(geometry)    {48x48}
+# Report status on stdout, override with --verbose option
+set config(verbose) 1
+# Status check timeout (seconds), override with --timeout option
+set config(timeout) 5
+# Temperature display unit (C/F), override with --unit option
+set config(unit)    C
+# Temperature threshold at which the temperature is displayed in red
+set config(t_high)  80
+# Temperature thresholds: {fan_speeds low_ac high_ac low_batt high_batt}
+# These were tested on the I8000. If you have a different Dell laptop model
+# you should check the BIOS temperature monitoring and set the appropriate
+# thresholds here. In doubt start with low values and gradually rise them
+# until the fans are not always on when the cpu is idle.
+set config(0) {{-1 0} -1 60 -1 65}
+set config(1) {{-1 1} 50 70 55 75}
+set config(2) {{-1 1} 60 80 65 85}
+set config(3) {{-1 2} 70 128 75 128}
+# end of file
+#+end_src
+
+unten stehen die Fan-Thresholds
+
 ** dell-bios-fan-control
 
 i8k wird leider von den Bios-Einstellungen überschrieben, deshalb explizit Bios
@@ -63,8 +98,8 @@ und =make= ausführen. Dann kann via
 > dell-bios-fan-control 0
 #+end_src
 
-das Bios deaktiviert werden (und mit =1= aktiviert). Dann funktioniert i8k.
-Testen mit
+das Bios deaktiviert werden (und mit =1= aktiviert). Dann funktioniert i8k. Testen
+mit
 
 #+begin_src bash
 > i8kfan 1 1
@@ -72,7 +107,7 @@ Testen mit
 
 Sollte Lüfter anschalten können.
 
-Hinweis: Das bricht Stand jetzt die den Suspen-Modus "deep": Er geht zwar in
+*Hinweis*: Das bricht Stand jetzt die den Suspen-Modus "deep": Er geht zwar in
 deep-Sleep, wacht aber nicht mehr davon auf und muss neugestartet werden.
 
 ** dell-smm-hwmon ?
