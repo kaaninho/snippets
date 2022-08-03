@@ -732,3 +732,8 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub root@bbb.active-group.de
 Gerade benutze ich BackInTime
 
 Alternative Deja Dup? Anschauen nächstes Mal
+
+* Shellcheck
+
+Mit dem Kommandozeilentool =shellcheck= kann ein Bash-Skript auf Syntax überprüft
+werden und Vorschläge bekommen. Installieren z. B. mit =apt=.
