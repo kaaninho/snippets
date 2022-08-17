@@ -737,3 +737,14 @@ Alternative Deja Dup? Anschauen nächstes Mal
 
 Mit dem Kommandozeilentool =shellcheck= kann ein Bash-Skript auf Syntax überprüft
 werden und Vorschläge bekommen. Installieren z. B. mit =apt=.
+
+* Shell Skripte per Ubuntu-GUI anzeigen
+
+Benutze =zenity=. Z. B.
+
+#+begin_src bash
+zenity --info --title="Fan Control" --text="FLUP"
+#+end_src
+
+Dann entsprechend das Shell-Skript, das =zenity= aufruft, per Shortcuts in den
+Ubuntu-Settings an einen Shortcut binden.
