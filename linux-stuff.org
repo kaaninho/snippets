@@ -428,12 +428,16 @@ und den Wert auf =true= setzen
  Versucht, gg. Datei zu extrahieren, egal welches Format
 
 * Memory-Management
+
 mit =free -m= Memory-Usage anschauen. "available" ist der wichtige und richtige
 Wert. Ist RAM zu voll, wird teilweise geswappt. Swapping macht PC langsam und
 warm (so meine Erfahrung). Deshalb kann man Swapping-Verhalten anpassen:
+
 ** Swap
+
 *** Swap leeren
- Wenn was im Swap Speicher ist, obwohl man genug RAM hätte, kann man mit
+
+Wenn was im Swap Speicher ist, obwohl man genug RAM hätte, kann man mit
  folgenden Befehlen den Swap kurzzeitig aus- und anschalten. Die Swap-Inhalte
  werden vor dem Ausschalten in den RAM gepumpt.
 
@@ -443,7 +447,10 @@ warm (so meine Erfahrung). Deshalb kann man Swapping-Verhalten anpassen:
  #+end_src
 
 *** Swappiness
- Man kann einstellen, wie zügig der Swap-Speicher benutzt werden soll.
+
+Default ist: 60
+
+Man kann einstellen, wie zügig der Swap-Speicher benutzt werden soll.
 
  #+begin_src bash
  # Zeige aktuelle Swappiness (default Ubuntu ist 60)
@@ -460,6 +467,29 @@ warm (so meine Erfahrung). Deshalb kann man Swapping-Verhalten anpassen:
  https://www.howtoforge.com/tutorial/linux-swappiness/
  https://www.howtogeek.com/449691/what-is-swapiness-on-linux-and-how-to-change-it/
 
+*** vm.max_map_count
+
+Default ist: 65535
+
+Wert anzeigen lassen
+
+#+begin_src bash
+sysctl -n vm.max_map_count
+#+end_src
+
+War bei mir auf =262144=. Hatte ich selbst irgendwann mal gesetzt, weiß nicht mehr
+warum. Glaube wegen BIMsystems oder netzlive.
+
+Kann man permanent setzen in =/etc/sysctl.conf=.
+
+Temporär setzen mit:
+
+#+begin_src bash
+sysctl -w vm.max_map_count=65535
+#+end_src
+
+
+ 
 *** Prozesse, die Swap benutzen, anzeigen
 
 Um zu sehen, welche Prozesse wie viel Swap benutzen, folgenden Code ausführen:
@@ -569,10 +599,26 @@ bedeutet
 
 Gnome Shell Extension "Nothing to say"
 
-** Alt Tab lift first window
-** Alt Tab Workspace
+** AltTab Mod
+
+Macht, dass nicht alle Fenster einer Applikation angezeigt werden beim Switch,
+sondern nur das letzte.
+
 ** system-monitor
+
+funktioniert nicht mehr richtig?
+
+** Old
+*** Alt Tab lift first window
+
+hab stattdessen jetzt 
+
+*** Alt Tab Workspace
+
+braucht es nicht mehr seit ubuntu 22.04
+
 ** User Themes
+
 * Gnu Pass
 Passwort-Manager im Terminal
 
