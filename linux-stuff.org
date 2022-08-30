@@ -579,6 +579,7 @@ Make Caps Lock an additional Esc
 Es kann sein, dass es mal für externe Tastatur nicht funktioniert. Dann
 deaktivieren, Tweaks schließen, wieder starten und aktivieren.
 * gnome-shell-extensions
+
 ** gtile
 
 Damit kann man Fenster am Bildschirm anordnen, z. B. hälftig im Monitor, oder
@@ -595,29 +596,35 @@ bedeutet
 - =3:1 4:1= nimm Platz vom 3. Sechstel bis 4. ein
 - =2:1 5:1= nimm Platz vom 2. Sechstel bis 5. ein
 
-** Microphone Usage Indicator
-
-Gnome Shell Extension "Nothing to say"
-
 ** AltTab Mod
 
 Macht, dass nicht alle Fenster einer Applikation angezeigt werden beim Switch,
 sondern nur das letzte.
 
-** system-monitor
+** Vitals
 
-funktioniert nicht mehr richtig?
+System-Monitor in der Leiste oben, CPU, Mem, Temp
+
+sehr gut
 
 ** Old
 *** Alt Tab lift first window
+*** system-monitor
 
-hab stattdessen jetzt 
+funktioniert nicht mehr richtig?
+
+
+hab stattdessen jetzt Vitals
 
 *** Alt Tab Workspace
 
 braucht es nicht mehr seit ubuntu 22.04
 
-** User Themes
+*** User Themes
+*** Microphone Usage Indicator
+
+Gnome Shell Extension "Nothing to say"
+
 
 * Gnu Pass
 Passwort-Manager im Terminal
