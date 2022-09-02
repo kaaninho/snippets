@@ -625,7 +625,6 @@ braucht es nicht mehr seit ubuntu 22.04
 
 Gnome Shell Extension "Nothing to say"
 
-
 * Gnu Pass
 Passwort-Manager im Terminal
 
@@ -801,3 +800,9 @@ zenity --info --title="Fan Control" --text="FLUP"
 
 Dann entsprechend das Shell-Skript, das =zenity= aufruft, per Shortcuts in den
 Ubuntu-Settings an einen Shortcut binden.
+
+* Screenshot
+
+seit Ubuntu 22.04 gab es keinen Shortcut mehr für Selection-Screenshot. Um es
+wieder zu haben, in den Keyboard Shortcuts einfach Custom shortcut machen, mit
+Befehl "gnome-screenshot -a". Den z. B. auf "SHIFT+PRNT" setzen.
